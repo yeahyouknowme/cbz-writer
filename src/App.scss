@@ -1,0 +1,68 @@
+.flex-row{
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col{
+  display: flex;
+  flex-direction: column;
+}
+
+.app{
+  background-color: aquamarine;
+  text-align: center;
+  height: 100vh;
+}
+
+.display-box{
+  height: 80vh;
+  width: 80vw;
+  margin-left: 10vw;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  background-color: bisque;
+}
+
+.image-display{
+  flex-wrap: wrap;
+}
+
+.image-preview-frame{
+  height: 150px;
+  width: auto;
+  margin: 10px 10px 0px 10px;
+}
+
+.image-preview{
+  height: 90%;
+}
+
+
+input[type="file"]{
+  color: rgba(0, 0, 0, 0);
+  width: 0.1px; // some browsers throw out elements w/ 0px dimensions 
+  height: 0.1px;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; 
+}
+
+.fileInput + label {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: white;
+  background-color: rgb(109, 10, 10);
+  display: inline-block;
+  margin: 0px 2px 0px 2px;
+  padding: 2px 4px 2px 4px;
+
+}
+
+.fileInput:focus + label,
+.fileInput + label:hover {
+  background-color: rgb(109, 10, 10);
+  cursor: pointer;
+}
