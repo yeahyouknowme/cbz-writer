@@ -44,27 +44,33 @@ function App() {
 
     const onFileChange = (e) => {
 
-        let filesTemp = validateMime(e.target.files);
-        console.info('Rejected: ', filesTemp.rejected, ' | Only image files are allowed.');
+        validateMime(e.target.files)
+        .then(newFiles => {
+          console.log('Accepted: ', newFiles.accepted)
+          if(newFiles.rejected.length > 0){
+            console.info('Rejected: ', newFiles.rejected, ' | Only image files are allowed.');
+          }
 
-        let orderCounter = 1;
+          let orderCounter = 1;
 
-        let lastIdx = _.findLastIndex(filesTemp, function(file) { return file.order > 0 });
+          let lastIdx = _.findLastIndex(newFiles, function(file) { return file.order > 0 });
 
-        if(lastIdx > -1){
-            orderCounter = orderCounter + filesTemp[lastIdx].order;   
-        }
-        
-        for (let i = 0; i < e.target.files.length; i++) {
-            filesTemp.results.push({
+          if(lastIdx > -1){
+              orderCounter = orderCounter + newFiles[lastIdx].order;   
+          }
+          
+          for (let i = 0; i < e.target.files.length; i++) {
+            console.log(newFiles.accepted[i]);
+            newFiles.results.push({
                 id: e.target.files[i].name + '-' + i,
                 name: e.target.files[i].name,
                 file: e.target.files[i],
                 order: orderCounter + i,
                 image: URL.createObjectURL(e.target.files[i])
             });
-        }
-        setFiles([...files, ...filesTemp.results]);
+          }
+          setFiles([...files, ...newFiles.results]);
+        })
     };
 
     const onNameChange = (e) => {
